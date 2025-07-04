@@ -16,9 +16,11 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-import environ
-env = environ.Env()
-environ.Env.read_env()
+from environ import Env
+
+env = Env()
+Env.read_env()
+ENVIRONMENT = env('ENVIRONMENT', default='production')
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,9 +30,13 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if ENVIRONMENT == 'development':
+    DEBUG = True
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage.up.railway.app']
 
 
 # Application definition
@@ -89,7 +95,7 @@ WSGI_APPLICATION = 'root.wsgi.application'
 
 # Local Database
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -100,8 +106,12 @@ DATABASES = {
         'PORT': '5500',              
     }
 }
-'''
 
+import dj_database_url
+
+POSTGRES_LOCALLY = True
+if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
+    DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
 
 
 
@@ -130,7 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = env('MY_TIMEZONE')
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
@@ -156,14 +166,7 @@ LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/garage'
 LOGOUT_REDIRECT_URL = '/garage'
 
-# Render PostgreSQL Live database
 
-
-import dj_database_url
-
-DATABASES = {
-    'default': dj_database_url.parse(env('DATABASE_URL'))
-}
 
 
 
