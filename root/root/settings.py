@@ -28,7 +28,7 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -88,6 +88,7 @@ WSGI_APPLICATION = 'root.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # Local Database
+
 '''
 DATABASES = {
     'default': {
@@ -100,6 +101,7 @@ DATABASES = {
     }
 }
 '''
+
 
 
 
@@ -155,10 +157,12 @@ LOGOUT_REDIRECT_URL = '/garage'
 
 # Render PostgreSQL Live database
 
+
 import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.parse(env('DATABASE_URL'))
 }
+
 
 
