@@ -95,12 +95,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'f1fantasygaragedb',
         'USER': 'postgres',              
-        'PASSWORD': 'Moureabanx@1',  
+        'PASSWORD': env('LOCAL_DATABASE_PASSWORD'),  
         'HOST': 'localhost',
         'PORT': '5500',              
     }
 }
 '''
+
 
 
 
@@ -129,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kathmandu'
+TIME_ZONE = env('MY_TIMEZONE')
 
 USE_I18N = True
 
@@ -163,6 +164,7 @@ import dj_database_url
 DATABASES = {
     'default': dj_database_url.parse(env('DATABASE_URL'))
 }
+
 
 
 
