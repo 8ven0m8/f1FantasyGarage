@@ -35,7 +35,7 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage.up.railway.app', 'localhost', '*']
+ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage.up.railway.app', 'localhost']
 CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage.up.railway.app/',]
 
 
@@ -109,7 +109,7 @@ DATABASES = {
 
 import dj_database_url
 
-POSTGRES_LOCALLY = False
+POSTGRES_LOCALLY = True
 if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
     DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
 
