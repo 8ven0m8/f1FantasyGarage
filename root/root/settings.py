@@ -35,8 +35,8 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage.up.railway.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage.up.railway.app', 'localhost', '*']
+CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage.up.railway.app/',]
 
 
 # Application definition
