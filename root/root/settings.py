@@ -170,6 +170,17 @@ LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/garage'
 LOGOUT_REDIRECT_URL = '/garage'
 
+# Add this for Railway
+if not DEBUG:
+    # Railway environment
+    NPM_BIN_PATH = '/nix/store/*/bin/npm'  # Railway's npm path
+    STATICFILES_DIRS = []  # Don't use STATICFILES_DIRS in production
+else:
+    # Local development
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
+
 
 
 
