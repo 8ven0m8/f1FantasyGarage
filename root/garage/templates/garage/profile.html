@@ -1,0 +1,303 @@
+{% extends "layout.html" %}
+{% load humanize %}
+
+
+{% block profile %}
+<div class="bg-cyan-950 p-4">
+
+    <div class="border-1 shadow-lg shadow-gray-700 rounded-lg min-h-screen">
+
+        <!-- top content -->
+        <div class="flex rounded-t-lg bg-top-color sm:px-2 w-full object-cover bg-cover bg-[position:220px_-250px] bg-[url('https://mclaren.bloomreach.io/delivery/resources/content/gallery/mclaren-racing/legacy/galleries/1993-mp4_8-large_v7._editjpg.jpg')] relative">
+            <div class=" absolute w-35 h-20 bg-[url('https://m.media-amazon.com/images/I/31G7V93202L.jpg')] bg-no-repeat bg-right-top bg-cover top-0 right-0 ">
+            </div>
+            <a href="{% url 'update_profile_image' %}">
+                <div class="relative h-40 w-40 group overflow-hidden sm:rounded-full sm:relative sm:p-0 top-10 left-5 p-3 object-cover">
+
+                    <!-- Profile Image -->
+                    <img class="h-full w-full object-cover rounded-full" src="{{ user.profile.image.url }}" onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg';"/>
+
+                    <!--Pencil Icon-->
+                    <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-30 transition duration-200 flex items-center justify-center rounded-full">
+                        <svg class="w-12 h-12 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <div class="max-w-screen sm:text-left p-5 mt-10 text-start text-white h-fit border-2 rounded-4xl bg-[#E56717]">
+                <p class="font-poppins font-bold text-heading sm:text-4xl text-2xl">
+                    {{user.username}}
+                </p>
+                <p class="text-heading text-gray-200">{{user.email}}</p>
+            </div>
+
+        </div>
+        <!--NAVBAR-->
+        <nav class="w-full bg-transparent px-8 py-4 flex justify-center gap-12">
+        <button onclick="showProfileSection('posts')" class="relative text-white text-lg font-semibold transition duration-300 ease-in-out hover:text-gray-200
+                            after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-0.5 after:w-0 
+                            after:bg-white after:transition-all after:duration-500 after:ease-in-out 
+                            hover:after:w-full focus:after:w-full">
+            Posts
+            </button>
+        <button onclick="showProfileSection('comments')" class="relative text-white text-lg font-semibold transition duration-300 ease-in-out hover:text-gray-200
+                            after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-0.5 after:w-0 
+                            after:bg-white after:transition-all after:duration-500 after:ease-in-out 
+                            hover:after:w-full focus:after:w-full">
+            Comments
+            </button>
+        <button onclick="showProfileSection('upvoted')" class="relative text-white text-lg font-semibold transition duration-300 ease-in-out hover:text-gray-200
+                            after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-0.5 after:w-0 
+                            after:bg-white after:transition-all after:duration-500 after:ease-in-out 
+                            hover:after:w-full focus:after:w-full">
+            Upvoted
+            </button>
+        </nav>
+        <!--NAVBAR-->
+        <div id="posts">
+            {% if posts %}
+            {% for post in posts %}
+            <div class="mt-5 max-w-2xl mx-auto bg-cyan-800 rounded-xl shadow-md p-6 mb-8 border border-cyan-950">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <img src="{{post.user.profile.image.url}}" alt="avatar" class="w-10 h-10 rounded-full object-cover" onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg';">
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-300">Posted by <span class="text-white">{{post.user.username}}</span>
+                            {% if post.updated_at|date:"U" != post.created_at|date:"U" %}
+                            <span class="text-xs ms-2 text-gray-400">
+                                (edited {{post.updated_at|naturaltime}})
+                            </span>
+                            {% endif %}
+                            </h3>
+                            <p class="text-xs text-gray-400">{{post.created_at|naturaltime}}</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold bg-gray-800 text-white px-3 py-1 rounded-full">#{{post.flair}}</span>
+                </div>
+                
+                <!-- Title -->
+                <h2 class="text-xl font-semibold text-white mb-2">{{post.title}}</h2>
+                
+                <!-- Body -->
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    {{post.description}}
+                </p>
+                
+            <!-- Optional Image -->
+            <img src="{{post.image.url}}" alt="forum image" class="w-full rounded-lg mb-4 shadow-sm">
+            
+            <!-- Buttons -->
+            <div class="flex items-center gap-4 text-sm text-gray-300">
+                <form action="{% url 'vote_post' post.id 'upvote' %}" method="post">
+                    {% csrf_token %}
+                    <button class="flex items-center gap-1 hover:text-white transition">
+                        {% if post.user_vote == 1 %}
+                        <svg class="w-6 h-6" fill="#ff2929" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#ff2929"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625l-8-10c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14z"></path></g></svg>
+                        {% else %}
+                        <svg class="w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M12.781 2.375c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625l-8-10zM15 12h-1v8h-4v-8H6.081L12 4.601L17.919 12H15z"/></svg>
+                        {% endif %}
+                        <span>{{post.total_upvotes}}</span>
+                    </button>
+                    </form>
+
+                    <form action="{% url 'vote_post' post.id 'downvote' %}" method="post">
+                    {% csrf_token %}
+                    <button class="flex items-center gap-1 hover:text-white transition">
+                        {% if post.user_vote == -1 %}
+                        <svg class="h-6 w-6" fill="#2970ff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#2970ff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M20.901 10.566A1.001 1.001 0 0 0 20 10h-4V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v7H4a1.001 1.001 0 0 0-.781 1.625l8 10a1 1 0 0 0 1.562 0l8-10c.24-.301.286-.712.12-1.059z"></path></g></svg>
+                        {% else %}
+                        <svg class="w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M20.901 10.566A1.001 1.001 0 0 0 20 10h-4V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v7H4a1.001 1.001 0 0 0-.781 1.625l8 10a1 1 0 0 0 1.562 0l8-10c.24-.301.286-.712.12-1.059zM12 19.399L6.081 12H10V4h4v8h3.919L12 19.399z"/></svg>
+                        {% endif %}
+                        <span>{{post.total_downvotes}}</span>
+                    </button>
+                </form>
+
+                <!-- Comment -->
+                <a href="{% url "comment" post.id%}" class="flex items-center gap-1 hover:text-white transition">
+                <svg class="w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.3 16.7a9 9 0 1 1 3 3L3 21z"/></svg>
+                <span>{{post.comments.all|length}}</span>
+                </a>
+
+                {% if post.user == user %}
+                <!--edit-->
+                <a href="{% url "edit" post.id%}">
+                <button class="flex items-center gap-1 hover:text-white transition">
+                <svg class="w-7 h-7 text-gray-800 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                </svg>
+                </button>
+                </a>
+                
+                <!--delete-->
+                <a href="{% url "delete" post.id%}">
+                <button class="flex items-center gap-1 hover:text-white transition">
+                <svg class="w-6 h-6 text-gray-800 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                </svg>
+                </button>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="flex items-center justify-center">
+            <article class="p-6 text-base bg-white rounded-lg dark:bg-cyan-900 mb-2">
+                You haven't made a post yet.
+            </article>
+        </div>
+        {% endif %}
+    </div>
+
+
+    <div id="comments" class="hidden mt-4">
+        <div class="flex items-center justify-center">
+            <div>
+                {% if comments %}
+                {% for comment in comments %}
+                <article class="p-6 text-base bg-white rounded-lg dark:bg-cyan-900 mb-2">
+                    <footer class="flex justify-between items-center mb-2">
+                        <div class="flex items-center">
+                            <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
+                                class="mr-2 w-6 h-6 rounded-full object-cover"
+                                src="{{comment.user.profile.image.url}}"
+                                alt="Username"
+                                onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg';">
+                                {{comment.user.username}}
+                            </p>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">
+                                <time>{% if comment.updated_at|date:"U" != comment.created_at|date:"U" %}(edited {{comment.updated_at|naturaltime}}){% else %}{{comment.created_at|naturaltime}}{% endif %}</time>
+                            </p>
+                        </div>
+                    </footer>
+                    <p class="text-gray-500 dark:text-gray-300">{{comment.comment}}</p>
+                    <a type="submit" href="{% url "comment" comment.post.id%}"
+                        class="mt-2 inline-flex items-center py-2.5 px-4 text-xs font-medium text-center dark:bg-cyan-800 text-white rounded-lg focus:ring-4 focus:ring-cyan-700 hover:bg-cyan-700">
+                        Go to original post
+                    </a>
+                </article>
+                {% endfor %}
+                {% else %}
+                <article class="p-6 text-base bg-white rounded-lg dark:bg-cyan-900 mb-2">
+                    You haven't made a comment yet.
+                </article>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div id="upvoted" class="hidden mt-4">
+        <div id="posts">
+            {% if upvoted_posts %}
+            {% for post in upvoted_posts %}
+            <div class="mt-5 max-w-2xl mx-auto bg-cyan-800 rounded-xl shadow-md p-6 mb-8 border border-cyan-950">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <img src="{{post.user.profile.image.url}}" alt="avatar" class="w-10 h-10 rounded-full object-cover" onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg';">
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-300">Posted by <span class="text-white">{{post.user.username}}</span>
+                            {% if post.updated_at|date:"U" != post.created_at|date:"U" %}
+                            <span class="text-xs ms-2 text-gray-400">
+                                (edited {{post.updated_at|naturaltime}})
+                            </span>
+                            {% endif %}
+                            </h3>
+                            <p class="text-xs text-gray-400">{{post.created_at|naturaltime}}</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold bg-gray-800 text-white px-3 py-1 rounded-full">#{{post.flair}}</span>
+                </div>
+                
+                <!-- Title -->
+                <h2 class="text-xl font-semibold text-white mb-2">{{post.title}}</h2>
+                
+                <!-- Body -->
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    {{post.description}}
+                </p>
+                
+            <!-- Optional Image -->
+            <img src="{{post.image.url}}" alt="forum image" class="w-full rounded-lg mb-4 shadow-sm">
+            
+            <!-- Buttons -->
+            <div class="flex items-center gap-4 text-sm text-gray-300">
+                <form action="{% url 'vote_post' post.id 'upvote' %}" method="post">
+                    {% csrf_token %}
+                    <button class="flex items-center gap-1 hover:text-white transition">
+                        <svg class="w-6 h-6" fill="#ff2929" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#ff2929"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625l-8-10c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14z"></path></g></svg>
+                        <span>{{post.total_upvotes}}</span>
+                    </button>
+                    </form>
+
+                    <form action="{% url 'vote_post' post.id 'downvote' %}" method="post">
+                    {% csrf_token %}
+                    <button class="flex items-center gap-1 hover:text-white transition">
+                        <svg class="w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M20.901 10.566A1.001 1.001 0 0 0 20 10h-4V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v7H4a1.001 1.001 0 0 0-.781 1.625l8 10a1 1 0 0 0 1.562 0l8-10c.24-.301.286-.712.12-1.059zM12 19.399L6.081 12H10V4h4v8h3.919L12 19.399z"/></svg>
+                        <span>{{post.total_downvotes}}</span>
+                    </button>
+                </form>
+
+                <!-- Comment -->
+                <a href="{% url "comment" post.id%}" class="flex items-center gap-1 hover:text-white transition">
+                <svg class="w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.3 16.7a9 9 0 1 1 3 3L3 21z"/></svg>
+                <span>{{post.comments.all|length}}</span>
+                </a>
+
+                {% if post.user == user %}
+                <!--edit-->
+                <a href="{% url "edit" post.id%}">
+                <button class="flex items-center gap-1 hover:text-white transition">
+                <svg class="w-7 h-7 text-gray-800 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                </svg>
+                </button>
+                </a>
+                
+                <!--delete-->
+                <a href="{% url "delete" post.id%}">
+                <button class="flex items-center gap-1 hover:text-white transition">
+                <svg class="w-6 h-6 text-gray-800 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                </svg>
+                </button>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="flex items-center justify-center">
+            <article class="p-6 text-base bg-white rounded-lg dark:bg-cyan-900 mb-2">
+                You haven't upvoted any posts.
+            </article>
+        </div>
+        {% endif %}
+    </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts1 %}
+<script>
+function showProfileSection(idToShow) {
+        const sections = ['posts', 'comments', 'upvoted'];
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.add('hidden');
+            }
+        });
+        const toShow = document.getElementById(idToShow);
+        if (toShow) {
+            toShow.classList.remove('hidden');
+        }
+    }
+</script>
+{% endblock %}
+
+

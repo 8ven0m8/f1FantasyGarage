@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+
+{% block TopLeaderboard %}
+<div class="w-full border-2 border-gray-700 bg-blue-950">
+    <h1 class="text-3xl font-mono text-center mt-4 mb-5 text-gray-800 dark:text-white">
+        Top 5 in {{year}} Drivers Championship
+    </h1>
+    <div class="flex flex-row items-center justify-center text-center">
+        {% for data in leaderdata|slice:":5" %}
+        <div class="max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 m-4">
+            <div class="px-4 py-2">
+                <h1 class="text-xl font-bold text-gray-800 uppercase dark:text-white">{{data.name}}</h1>
+                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{data.team}}</p>
+            </div>
+            
+            <img class="object-cover w-58 h-65 mt-2" src="{{data.image.url}}" alt="NIKE AIR">
+            
+            <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
+                <h1 class="text-lg font-bold text-white">{{data.points}} PTS</h1>
+                <h1 class="text-lg font-bold text-white">#{{forloop.counter}}</h1>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block calendar %}
+<div class="w-full border-2 border-gray-700 pb-18">
+    <h1 class="text-4xl font-extrabold text-left mt-4 mb-5 ms-5 text-gray-800 dark:text-white">
+        {{year}} Calendar:
+    </h1>
+    <div class="flex flex-row items-center justify-center text-center">
+        <!--previous race-->
+        <div class="relative w-136 h-84 rounded-lg overflow-hidden shadow-lg m-4">
+            <!-- Image -->
+            <img src="{{past.image.url}}" alt="Background" class="w-full h-full object-cover" />
+            
+            <!-- Overlay with text -->
+            <div class="absolute inset-0 bg-black/50 flex flex-col justify-start items-start p-6 z-20">
+                
+                <!-- Title + Flag Row -->
+                <div class="flex items-center justify-between w-full">
+                    <h2 class="text-3xl font-bold text-white">{{past.circuit}}</h2>
+                    <img src="{{past.country_image.url}}" alt="Flag" class="w-10 h-10 rounded-full object-cover ml-4" />
+                </div>
+                
+                <!-- Description -->
+                <p class="text-white mt-2 text-left font-bold text-xl">{{past.country}}</p>
+                <p class="text-white mt-2 text-left">{{past.description}}</p>
+                
+                <!-- Date -->
+                <p class="text-white mt-2 text-xl font-bold">{{ past.from_date|date:"M d" }} - {{ past.to_date|date:"M d" }}</p>
+            </div>
+        </div>
+        <!--next race-->
+        <div class="relative w-156 h-104 rounded-lg overflow-hidden shadow-lg m-4">
+            <!-- Image -->
+            <img src="{{next_race.image.url}}" alt="Background" class="w-full h-full object-cover" />
+            
+            <!-- Overlay with text -->
+            <div class="absolute inset-0 bg-black/50 flex flex-col justify-start items-start p-6 z-20">
+                
+                <!-- Title + Flag Row -->
+                <div class="flex items-center justify-between w-full">
+                    <h2 class="text-3xl font-bold text-white">{{next_race.circuit}}</h2>
+                    <img src="{{next_race.country_image.url}}" alt="Flag" class="w-10 h-10 rounded-full object-cover ml-4" />
+                </div>
+                
+                <!-- Description -->
+                <p class="text-white mt-2 text-left font-bold text-xl">{{next_race.country}}</p>
+                <p class="text-white mt-2 text-left">{{next_race.description}}</p>
+                
+                <!-- Date -->
+                <p class="text-white mt-2 text-xl font-bold">{{ next_race.from_date|date:"M d" }} - {{ next_race.to_date|date:"M d" }}</p>
+            </div>
+        </div>
+        <!--upcoming race-->
+        <div class="relative w-136 h-84 rounded-lg overflow-hidden shadow-lg m-4">
+            <!-- Image -->
+            <img src="{{upcoming.image.url}}" alt="Background" class="w-full h-full object-cover" />
+            
+            <!-- Overlay with text -->
+            <div class="absolute inset-0 bg-black/50 flex flex-col justify-start items-start p-6 z-20">
+                
+                <!-- Title + Flag Row -->
+                <div class="flex items-center justify-between w-full">
+                    <h2 class="text-3xl font-bold text-white">{{upcoming.circuit}}</h2>
+                    <img src="{{upcoming.country_image.url}}" alt="Flag" class="w-10 h-10 rounded-full object-cover ml-4" />
+                </div>
+                
+                <!-- Description -->
+                <p class="text-white mt-2 text-left font-bold text-xl">{{upcoming.country}}</p>
+                <p class="text-white mt-2 text-left">{{upcoming.description}}</p>
+                
+                <!-- Date -->
+                <p class="text-white mt-2 text-xl font-bold">{{ upcoming.from_date|date:"M d" }} - {{ upcoming.to_date|date:"M d" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block Constructorboard %}
+<div class="w-full border-2 border-gray-700 bg-red-950">
+    <h1 class="text-3xl font-mono text-center mt-4 mb-5 text-gray-800 dark:text-white">
+        Top 5 in {{year}} Constructors Championship
+    </h1>
+    <div class="flex flex-row items-center justify-center text-center">
+        {% for data in constructordata|slice:":5" %}
+        <div class="max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 m-4">
+            <div class="px-4 py-2">
+                <h1 class="text-xl font-bold text-gray-800 uppercase dark:text-white">{{data.name}}</h1>
+            </div>
+            
+            <img class="object-cover w-58 h-65 mt-2" src="{{data.image.url}}" alt="NIKE AIR">
+            
+            <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
+                <h1 class="text-lg font-bold text-white">{{data.points}} PTS</h1>
+                <h1 class="text-lg font-bold text-white">#{{forloop.counter}}</h1>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

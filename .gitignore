@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django
+db.sqlite3
+local_settings.py
+root/media/
+staticfiles/
+root/static/
+*.log
+*.pot
+
+# Environment variables
+.env
+.env.*
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Tailwind & Node.js
+node_modules/
+package-lock.json
+yarn.lock
+npm-debug.log
+tailwindcss.log
+
+# Build artifacts (if using Tailwind CLI or similar tools)
+dist/
+build/
+
+# Coverage reports
+.coverage
+htmlcov/
+.tox/
+.nosetests.xml
+coverage.xml
+*.cover
+
+# Editor/IDE files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Miscellaneous
+*.swp
+*~

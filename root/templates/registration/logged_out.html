@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block registerform %}
+<div class="max-w-xl mx-auto mt-20 bg-gradient-to-br from-cyan-900 to-cyan-800 p-10 rounded-2xl shadow-2xl border border-gray-700 text-gray-300 relative">
+   
+    <div class="absolute -top-6 left-6 bg-cyan-700 px-4 py-1 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold tracking-wide text-white">You have been logged out.</h2>
+    </div>
+    
+    <p class="mt-6 text-sm text-center text-gray-400">
+        Signin again?
+        <a href="{% url 'login' %}" class="text-cyan-400 hover:underline">Sign in</a>
+    </p>
+</div>
+{% endblock %}

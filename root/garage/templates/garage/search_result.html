@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% load humanize %}
+
+{% block searchbar %}
+<form class="ms-10 min-w-sm mx-auto" method="GET" action="{% url 'search' %}">   
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+    <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+        </div>
+        <input name="q" type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search posts, users, flair..." value="{{request.GET.q}}" required />
+        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block post %}
+<a href="{% url "create" %}" class="fixed bottom-20 right-20 z-50 w-14 h-14 rounded-full bg-gray-600 text-white flex items-center justify-center shadow-lg hover:bg-gray-700 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+  </svg>
+</a>
+{% endblock %}
+
+{% block feed %}
+{% for post in posts %}
+<div class="mt-5 max-w-2xl mx-auto bg-cyan-800 rounded-xl shadow-md p-6 mb-8 border border-cyan-950">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center gap-3">
+      <img src="{{post.user.profile.image.url}}" alt="avatar" class="w-10 h-10 rounded-full object-cover" onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg';">
+      <div>
+        <h3 class="text-sm font-semibold text-gray-300">Posted by <span class="text-white">{{post.user.username}}</span>
+          {% if post.updated_at|date:"U" != post.created_at|date:"U" %}
+          <span class="text-xs ms-2 text-gray-400">
+            (edited {{post.updated_at|naturaltime}})
+          </span>
+          {% endif %}
+        </h3>
+        <p class="text-xs text-gray-400">{{post.created_at|naturaltime}}</p>
+      </div>
+    </div>
+    <span class="text-xs font-semibold bg-gray-800 text-white px-3 py-1 rounded-full">#{{post.flair}}</span>
+  </div>
+  
+  <!-- Title -->
+  <h2 class="text-xl font-semibold text-white mb-2">{{post.title}}</h2>
+  
+  <!-- Body -->
+  <p class="text-gray-300 leading-relaxed mb-4">
+    {{post.description}}
+  </p>
+  
+  <!-- Optional Image -->
+  <img src="{{post.image.url}}" alt="forum image" class="w-full rounded-lg mb-4 shadow-sm">
+  
+  <!-- Buttons -->
+  <div class="flex items-center gap-4 text-sm text-gray-300">
+
+    <form action="{% url 'vote_post' post.id 'upvote' %}" method="post">
+      {% csrf_token %}
+      <button class="flex items-center gap-1 hover:text-white transition">
+        <svg class="w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M12.781 2.375c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625l-8-10zM15 12h-1v8h-4v-8H6.081L12 4.601L17.919 12H15z"/></svg>
+        <span>{{post.total_upvotes}}</span>
+      </button>
+    </form>
+
+    <form action="{% url 'vote_post' post.id 'downvote' %}" method="post">
+      {% csrf_token %}
+      <button class="flex items-center gap-1 hover:text-white transition">
+        <svg class="w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M20.901 10.566A1.001 1.001 0 0 0 20 10h-4V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v7H4a1.001 1.001 0 0 0-.781 1.625l8 10a1 1 0 0 0 1.562 0l8-10c.24-.301.286-.712.12-1.059zM12 19.399L6.081 12H10V4h4v8h3.919L12 19.399z"/></svg>
+        <span>{{post.total_downvotes}}</span>
+      </button>
+    </form>
+
+    <!-- Comment -->
+    <a href="{% url "comment" post.id%}" class="flex items-center gap-1 hover:text-white transition">
+      <svg class="w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.3 16.7a9 9 0 1 1 3 3L3 21z"/></svg>
+      <span>{{post.comments.all|length}}</span>
+    </a>
+
+    {% if post.user == user %}
+    <!--edit-->
+    <a href="{% url "edit" post.id%}">
+    <button class="flex items-center gap-1 hover:text-white transition">
+      <svg class="w-7 h-7 text-gray-800 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+      </svg>
+    </button>
+    </a>
+    
+    <!--delete-->
+    <a href="{% url "delete" post.id%}">
+    <button class="flex items-center gap-1 hover:text-white transition">
+      <svg class="w-6 h-6 text-gray-800 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+      </svg>
+    </button>
+    </a>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block scripts2 %}
+<script>
+// Save scroll position before page unloads
+        window.addEventListener("beforeunload", function () {
+            sessionStorage.setItem("scrollPosition", window.scrollY);
+        });
+
+        // Restore scroll position after page loads
+        window.addEventListener("load", function () {
+            const scrollY = sessionStorage.getItem("scrollPosition");
+            if (scrollY !== null) {
+            window.scrollTo(0, parseInt(scrollY));
+            }
+        });
+</script>
+{% endblock %}
