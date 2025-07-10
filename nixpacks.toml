@@ -1,0 +1,12 @@
+[phases.setup]
+nixPkgs = ["nodejs", "npm"]
+
+[phases.build]
+cmds = [
+    "cd root && python manage.py tailwind install",
+    "cd root && python manage.py tailwind build", 
+    "cd root && python manage.py collectstatic --noinput"
+]
+
+[start]
+cmd = "cd root && gunicorn root.wsgi:application --bind 0.0.0.0:$PORT"

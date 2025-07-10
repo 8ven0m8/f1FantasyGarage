@@ -35,7 +35,7 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage.up.railway.app', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage.up.railway.app', 'localhost', '0.0.0.0']
 CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage.up.railway.app/',]
 
 
@@ -48,15 +48,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'garage',
     'tailwind',
+    'garage',
     'theme',
     'django.contrib.humanize',
     'nested_admin',
+    'django_browser_reload',
 ]
 
 TAILWIND_APP_NAME = 'theme'
-INTERNAL_IPS = ['127.0.0.1']
+
 NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'
 
 MIDDLEWARE = [
@@ -68,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'root.urls'

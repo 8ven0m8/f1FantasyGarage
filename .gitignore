@@ -8,6 +8,7 @@ db.sqlite3
 local_settings.py
 root/media/
 root/static/
+/staticfiles/
 *.log
 *.pot
 
