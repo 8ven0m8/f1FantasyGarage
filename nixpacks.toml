@@ -1,11 +1,9 @@
 [phases.setup]
-nixPkgs = ["nodejs", "python310"]
+nixPkgs = ["nodejs_20", "python310", "postgresql", "libpq"]
 
 [phases.build]
 cmds = [
-    "cd root && python manage.py tailwind install",
-    "cd root && python manage.py tailwind build", 
-    "cd root && python manage.py collectstatic --noinput"
+    "cd root && python manage.py tailwind install && python manage.py tailwind build && python manage.py collectstatic --noinput"
 ]
 
 [start]
