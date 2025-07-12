@@ -35,9 +35,9 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage-production.up.railway.app', 'localhost', '0.0.0.0']
-CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage-production.up.railway.app',]
-INTERNAL_IPS = ['127.0.0.1', ]
+ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage-production.up.railway.app', 'localhost', '0.0.0.0', '*']
+CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage-production.up.railway.app']
+INTERNAL_IPS = ['127.0.0.1', '*']
 
 
 # Application definition
@@ -61,8 +61,6 @@ if DEBUG:
 
 TAILWIND_APP_NAME = 'theme'
 TAILWIND_CSS_PATH = "css/dist/styles.css"
-
-NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -163,9 +161,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-                    os.path.join(BASE_DIR, "theme/static"),
+                    BASE_DIR / "theme/static",
                     ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # For Railway deployment
 if not DEBUG:
@@ -184,15 +182,16 @@ LOGIN_REDIRECT_URL = '/garage'
 LOGOUT_REDIRECT_URL = '/garage'
 
 # Add this for Railway
-if not DEBUG:
+# if not DEBUG:
     # Railway environment
-    NPM_BIN_PATH = '/nix/store/*/bin/npm'  # Railway's npm path
-    STATICFILES_DIRS = [BASE_DIR, "theme/static"]  # Don't use STATICFILES_DIRS in production
+    # NPM_BIN_PATH = '/nix/store/*/bin/npm'
+
+if ENVIRONMENT == 'production':
+    # Railway will handle npm automatically, or use:
+    NPM_BIN_PATH = 'npm'  # Let system find npm
 else:
-    # Local development
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static'),
-    ]
+    NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'  # Windows local
+
 
 
 
