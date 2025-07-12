@@ -1,55 +1,138 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Django
-db.sqlite3
-local_settings.py
-root/media/
-root/static/
-root/staticfiles/
+# Django #
 *.log
 *.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
 
-# Environment variables
-.env
-.env.*
+# Backup files # 
+*.bak 
 
-# Virtual environments
-venv/
-env/
-.venv/
+# If you are using PyCharm # 
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
 
-# Tailwind & Node.js
-node_modules/
-package-lock.json
-yarn.lock
-npm-debug.log
-tailwindcss.log
+# AWS User-specific
+.idea/**/aws.xml
 
-# Build artifacts (if using Tailwind CLI or similar tools)
-dist/
-build/
+# Generated files
+.idea/**/contentModel.xml
 
-# Coverage reports
-.coverage
-htmlcov/
-.tox/
-.nosetests.xml
-coverage.xml
-*.cover
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
 
-# Editor/IDE files
-.idea/
-.vscode/
-*.sublime-workspace
-*.sublime-project
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
 
-# OS files
-.DS_Store
-Thumbs.db
+# File-based project format
+*.iws
 
-# Miscellaneous
-*.swp
-*~
+# IntelliJ
+out/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Python # 
+*.py[cod] 
+*$py.class 
+
+# Distribution / packaging 
+.Python build/ 
+develop-eggs/ 
+dist/ 
+downloads/ 
+eggs/ 
+.eggs/ 
+lib/ 
+lib64/ 
+parts/ 
+sdist/ 
+var/ 
+wheels/ 
+*.whl
+*.egg-info/ 
+.installed.cfg 
+*.egg 
+*.manifest 
+*.spec 
+
+# Installer logs 
+pip-log.txt 
+pip-delete-this-directory.txt 
+
+# Unit test / coverage reports 
+htmlcov/ 
+.tox/ 
+.coverage 
+.coverage.* 
+.cache 
+.pytest_cache/ 
+nosetests.xml 
+coverage.xml 
+*.cover 
+.hypothesis/ 
+
+# Jupyter Notebook 
+.ipynb_checkpoints 
+
+# pyenv 
+.python-version 
+
+# celery 
+celerybeat-schedule.* 
+
+# SageMath parsed files 
+*.sage.py 
+
+# Environments 
+.env 
+.venv 
+env/ 
+venv/ 
+ENV/ 
+env.bak/ 
+venv.bak/ 
+
+# mkdocs documentation 
+/site 
+
+# mypy 
+.mypy_cache/ 
+
+# Sublime Text # 
+*.tmlanguage.cache 
+*.tmPreferences.cache 
+*.stTheme.cache 
+*.sublime-workspace 
+*.sublime-project 
+
+# sftp configuration file 
+sftp-config.json 
+
+# Package control specific files Package 
+Control.last-run 
+Control.ca-list 
+Control.ca-bundle 
+Control.system-ca-bundle 
+GitHub.sublime-settings 
+
+# Visual Studio Code # 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
