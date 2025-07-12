@@ -27,25 +27,25 @@ class PostForm(forms.ModelForm):
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={
-            'class': 'w-full px-4 py-2 text-white border border-gray-800 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-950',
+            'class': 'w-full px-4 py-2 text-black border border-gray-800 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-950',
             'placeholder': 'Enter your email...'
         })
     )
     username = forms.CharField(
         widget=forms.TextInput(attrs={
-            'class': 'w-full px-4 py-2 text-white border border-gray-800 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-950',
+            'class': 'w-full px-4 py-2 text-black border border-gray-800 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-950',
             'placeholder': 'Choose a username...'
         })
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'class': 'w-full px-4 py-2 text-white border border-gray-800 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-950',
+            'class': 'w-full px-4 py-2 text-black border border-gray-800 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-950',
             'placeholder': 'Enter password...'
         })
     )
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'class': 'w-full px-4 py-2 text-white border border-gray-800 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-950',
+            'class': 'w-full px-4 py-2 text-black border border-gray-800 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-950',
             'placeholder': 'Confirm password...'
         })
     )

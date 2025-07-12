@@ -35,7 +35,7 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage.up.railway.app', 'localhost', '0.0.0.0']
+ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage.up.railway.app', 'localhost', '0.0.0.0', '*']
 CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage.up.railway.app/',]
 
 
@@ -53,8 +53,10 @@ INSTALLED_APPS = [
     'theme',
     'django.contrib.humanize',
     'nested_admin',
-    'django_browser_reload',
 ]
+
+if DEBUG:
+    INSTALLED_APPS += ['django_browser_reload']
 
 TAILWIND_APP_NAME = 'theme'
 
@@ -62,15 +64,20 @@ NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
+
+if DEBUG:
+    # Add django_browser_reload middleware only in DEBUG mode
+    MIDDLEWARE += [
+        "django_browser_reload.middleware.BrowserReloadMiddleware",
+    ]
 
 ROOT_URLCONF = 'root.urls'
 
@@ -111,7 +118,7 @@ DATABASES = {
 
 import dj_database_url
 
-POSTGRES_LOCALLY = True
+POSTGRES_LOCALLY = False
 if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
     DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
 
@@ -153,7 +160,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # For Railway deployment
