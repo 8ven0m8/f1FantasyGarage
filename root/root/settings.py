@@ -59,7 +59,7 @@ if DEBUG:
     INSTALLED_APPS += ['django_browser_reload']
 
 TAILWIND_APP_NAME = 'theme'
-TAILWIND_CSS_PATH = "staticfiles/css/dist/styles.css"
+TAILWIND_CSS_PATH = "css/dist/styles.css"
 
 NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'
 
@@ -162,7 +162,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),
-                    os.path.join(BASE_DIR, "theme/static"),
+                    os.path.join(BASE_DIR, "theme/staticfiles"),
                     ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -190,7 +190,7 @@ if not DEBUG:
 else:
     # Local development
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static'),
+        os.path.join(BASE_DIR, 'staticfiles'),
     ]
 
 
