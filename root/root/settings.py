@@ -59,7 +59,7 @@ if DEBUG:
     INSTALLED_APPS += ['django_browser_reload']
 
 TAILWIND_APP_NAME = 'theme'
-TAILWIND_CSS_PATH = "theme/css/dist/styles.css"
+TAILWIND_CSS_PATH = "staticfiles/css/dist/styles.css"
 
 NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'
 
