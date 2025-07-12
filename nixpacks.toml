@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["nodejs_20", "python310", "postgresql", "libpq"]
+nixPkgs = ["nodejs_20", "python310", "postgresql"]
 
 [phases.build]
 cmds = [
