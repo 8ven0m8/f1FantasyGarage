@@ -160,9 +160,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),
-                    os.path.join(BASE_DIR, "theme/staticfiles"),
+                    os.path.join(BASE_DIR, "theme/static"),
                     ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -186,11 +186,11 @@ LOGOUT_REDIRECT_URL = '/garage'
 if not DEBUG:
     # Railway environment
     NPM_BIN_PATH = '/nix/store/*/bin/npm'  # Railway's npm path
-    STATICFILES_DIRS = []  # Don't use STATICFILES_DIRS in production
+    STATICFILES_DIRS = [BASE_DIR, "theme/static"]  # Don't use STATICFILES_DIRS in production
 else:
     # Local development
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'staticfiles'),
+        os.path.join(BASE_DIR, 'static'),
     ]
 
 
