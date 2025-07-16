@@ -35,7 +35,7 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-DEBUG = True
+# DEBUG = True #Temporary
 
 ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage-production.up.railway.app', 'localhost', '0.0.0.0', '*']
 CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage-production.up.railway.app']
