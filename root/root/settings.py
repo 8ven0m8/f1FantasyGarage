@@ -35,7 +35,8 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-# DEBUG = True #Temporary
+DEBUG = True
+
 
 ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage-production.up.railway.app', 'localhost', '0.0.0.0', '*']
 CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage-production.up.railway.app']
@@ -180,7 +181,9 @@ if not DEBUG:
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGIN_URL = '/accounts/login'
@@ -197,6 +200,8 @@ if ENVIRONMENT == 'production':
     NPM_BIN_PATH = 'npm'  # Let system find npm
 else:
     NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'  # Windows local
+
+
 
 
 
