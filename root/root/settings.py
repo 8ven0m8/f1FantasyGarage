@@ -60,8 +60,6 @@ INSTALLED_APPS = [
     'nested_admin',
 ]
 
-if DEBUG:
-    INSTALLED_APPS += ['django_browser_reload']
 
 TAILWIND_APP_NAME = 'theme'
 TAILWIND_CSS_PATH = "css/dist/styles.css"
@@ -77,11 +75,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if DEBUG:
-    # Add django_browser_reload middleware only in DEBUG mode
-    MIDDLEWARE += [
-        "django_browser_reload.middleware.BrowserReloadMiddleware",
-    ]
 
 ROOT_URLCONF = 'root.urls'
 
