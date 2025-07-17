@@ -38,9 +38,9 @@ else:
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage-production.up.railway.app', 'localhost', '0.0.0.0', '*']
-CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage-production.up.railway.app']
-INTERNAL_IPS = ['127.0.0.1', '*']
+ALLOWED_HOSTS = ['127.0.0.1', 'f1fantasygarage.up.railway.app', 'localhost', '0.0.0.0']
+CSRF_TRUSTED_ORIGINS = ['https://f1fantasygarage.up.railway.app']
+INTERNAL_IPS = ['127.0.0.1']
 
 
 # Application definition
