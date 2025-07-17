@@ -17,7 +17,8 @@ class TopLeaderboard(models.Model):
 class ConstructorsLeaderboard(models.Model):
     name = models.CharField()
     points = models.IntegerField()
-    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    # image = models.ImageField(upload_to='images/', blank=True, null=True)
+    image = CloudinaryField('image', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -26,7 +27,8 @@ class Calendar(models.Model):
     circuit = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     country_image = models.ImageField(upload_to='images/', blank=True, null=True)
-    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    # image = models.ImageField(upload_to='images/', blank=True, null=True)
+    image = CloudinaryField('image', blank=True, null=True)
 
     from_date = models.DateTimeField()
     to_date = models.DateTimeField()
@@ -77,7 +79,8 @@ class Chat_post(models.Model):
     ]
     flair = models.CharField(max_length=25, choices=FLAIR_CHOICES)
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='images/')
+    # image = models.ImageField(upload_to='images/')
+    image = CloudinaryField('image')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -100,7 +103,8 @@ class Vote(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images/', default='media/image/default.jpg')
+    # image = models.ImageField(upload_to='images/', default='media/image/default.jpg')
+    image = CloudinaryField('image', blank=True, null=True)
 
     def __str__(self):
         return self.user.username
