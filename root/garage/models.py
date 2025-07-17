@@ -26,7 +26,8 @@ class ConstructorsLeaderboard(models.Model):
 class Calendar(models.Model):
     circuit = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
-    country_image = models.ImageField(upload_to='images/', blank=True, null=True)
+    # country_image = models.ImageField(upload_to='images/', blank=True, null=True)
+    country_image = CloudinaryField('image', blank=True, null=True)
     # image = models.ImageField(upload_to='images/', blank=True, null=True)
     image = CloudinaryField('image', blank=True, null=True)
 
