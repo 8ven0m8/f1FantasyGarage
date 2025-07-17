@@ -25,6 +25,7 @@ import nested_admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('garage/', include('garage.urls')),
+    path('', include('garage.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('_nested_admin/', include('nested_admin.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
