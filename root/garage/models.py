@@ -72,7 +72,7 @@ class RaceResult(models.Model):
         unique_together = ('race', 'driver')
 
     def __str__(self):
-        return f"{self.race.name} - {self.driver}"
+        return f"{self.race} - {self.driver}"
     
 class Chat_post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
