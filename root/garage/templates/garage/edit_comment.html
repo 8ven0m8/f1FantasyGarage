@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% load humanize %}
 
+{% block title %}Edit comment{% endblock %}
+
 {% block comment %}
 <div class="max-w-2xl mx-auto px-4 mt-4">
     <form class="mb-6" method="POST" action="{% url 'edit_comment' post.id comment_to_edit.id %}">
