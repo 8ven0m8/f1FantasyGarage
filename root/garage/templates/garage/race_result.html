@@ -30,6 +30,7 @@
             </tr>
         </thead>
         <tbody>
+            {% if race_result %}
             {% for result in race_result %}
             <tr class="bg-white border-b dark:bg-cyan-800 dark:border-gray-700 border-gray-200">
                 <td class="px-6 py-4">
@@ -46,6 +47,9 @@
                 </td>
             </tr>
             {% endfor %}
+            {% else %}
+            <tr class="bg-white border-b dark:bg-cyan-800 dark:border-gray-700 border-gray-200"><td colspan='4' scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">No results yet!</td></tr>
+            {% endif %}
         </tbody>
     </table>
 </div>

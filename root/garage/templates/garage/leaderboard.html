@@ -191,7 +191,7 @@
             
             <!-- Title + Flag Row -->
             <div class="flex items-center justify-between w-full">
-                <h2 class="text-3xl font-bold text-white">{{race.circuit}}</h2>
+                <h2 class="text-3xl font-bold text-white">#{{forloop.counter}} {{race.circuit}}</h2>
                 <img src="{{race.country_image.url}}" alt="Flag" class="w-10 h-10 rounded-full object-cover ml-4" />
             </div>
             
@@ -201,6 +201,9 @@
                 
                 <!-- Date -->
                 <p class="text-white mt-2 text-xl font-bold">{{ race.from_date|date:"M d" }} - {{ race.to_date|date:"M d" }}</p>
+            {% if race.status != 'None' %}
+            <div type="button" class=" mt-5 focus:outline-none text-white bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">{{ race.status }}</div>
+            {% endif %}
         </div>
     </div>
 </a>
