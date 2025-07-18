@@ -27,6 +27,9 @@
                 <th scope="col" class="px-6 py-3">
                     Points
                 </th>
+                <th scope='col' class="px-6 py-3">
+                    Status
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -44,6 +47,9 @@
                 </td>
                 <td class="px-6 py-4">
                     {{ result.points }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ result.status }}
                 </td>
             </tr>
             {% endfor %}
