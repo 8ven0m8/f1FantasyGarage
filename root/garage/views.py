@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import TopLeaderboard, ConstructorsLeaderboard, Calendar, Chat_post, Vote, Comments
+from .models import TopLeaderboard, ConstructorsLeaderboard, Calendar, Chat_post, Vote, Comments, RaceResult, Driver
 from django.utils import timezone
 from django.contrib.auth.models import User
 from .forms import PostForm, UserRegistrationForm, ProfileForm, CommentForm, ReplyForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.db.models import Q
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
 def garage_home(request):
@@ -26,6 +27,8 @@ def garage_home(request):
 def leaderboard(request):
     driversboard = TopLeaderboard.objects.all().order_by('-points')
     constructorboard = ConstructorsLeaderboard.objects.all().order_by('-points')
+    races = Calendar.objects.all()
+
 
     first_place = driversboard[0] if len(driversboard) > 0 else None
     second_place = driversboard[1] if len(driversboard) > 1 else None
@@ -43,6 +46,7 @@ def leaderboard(request):
                                                        'first_c': first_c,
                                                        'second_c': second_c,
                                                        'third_c': third_c,
+                                                       'races': races,
                                                        })
 
 def chat(request):
@@ -287,6 +291,11 @@ def search_view(request):
     if query:
         posts = Chat_post.objects.filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(user__username__icontains=query) | Q(flair__icontains=query))
     return render(request, 'garage/search_result.html', {'posts': posts})
+
+def DetailRaceResult(request, circuit_name):
+    race_result = RaceResult.objects.all().filter(race__circuit__iexact=circuit_name)
+    return render(request, 'garage/race_result.html', {'race_result': race_result})
+    
 
 
 

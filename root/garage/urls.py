@@ -19,4 +19,5 @@ urlpatterns = [
     path('deletecomment/<int:post_id>/<int:comment_id>/', views.delete_comment, name="delete_comment"),
     path('deletereply/<int:post_id>/<int:comment_id>/', views.delete_reply_to_comment, name="delete_reply"),
     path('search/', views.search_view, name='search'),
+    path('race_result/<str:circuit_name>/', views.DetailRaceResult, name='detail_race_result')
 ]

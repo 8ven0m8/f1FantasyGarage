@@ -57,7 +57,7 @@ class Calendar(models.Model):
         ordering = ['from_date']
 
     def __str__(self):
-        return f"{self.circuit} ({self.from_date.strftime('%Y-%m-%d')})"
+        return f"{self.circuit}"
 
     def is_upcoming(self):
         return self.from_date > timezone.now()
@@ -73,6 +73,7 @@ class RaceResult(models.Model):
 
     def __str__(self):
         return f"{self.race} - {self.driver}"
+    
     
 class Chat_post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

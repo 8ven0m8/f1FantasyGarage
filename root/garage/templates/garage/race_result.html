@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}Race result{% endblock %}
+
+{% block backbuttoncomment %}
+<a href="{% url "leaderboard" %}" class="fixed top-20 left-5 z-50 w-14 h-14 rounded-full bg-gray-600 text-white flex items-center justify-center shadow-lg hover:bg-gray-700 transition">
+  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+  </svg>
+</a>
+{% endblock %}
+
+{% block driver %}
+<div class="relative overflow-x-auto ms-45 mb-10 mt-10 me-45 rounded-xl">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-blue-950 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    S.No
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Team
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Points
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in race_result %}
+            <tr class="bg-white border-b dark:bg-cyan-800 dark:border-gray-700 border-gray-200">
+                <td class="px-6 py-4">
+                    {{ forloop.counter }}
+                </td>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ result.driver.name }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ result.driver.team }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ result.points }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
