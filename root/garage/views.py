@@ -294,7 +294,10 @@ def search_view(request):
 
 def DetailRaceResult(request, circuit_name):
     race_result = RaceResult.objects.all().filter(race__circuit__iexact=circuit_name)
-    return render(request, 'garage/race_result.html', {'race_result': race_result})
+    race = Calendar.objects.filter(circuit__iexact=circuit_name).get()
+    return render(request, 'garage/race_result.html', {'race_result': race_result,
+                                                       'race': race,
+                                                       })
     
 
 

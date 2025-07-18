@@ -66,45 +66,32 @@
 {% endblock %}
 
 {% block driver %}
-<div class="relative overflow-x-auto ms-45 mb-10 mt-10 me-45 rounded-xl">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-blue-950 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    S.No
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Team
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Points
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for driver in driversboard %}
-            <tr class="bg-white border-b dark:bg-cyan-800 dark:border-gray-700 border-gray-200">
-                <td class="px-6 py-4">
-                    {{ forloop.counter }}
-                </td>
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ driver.name }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ driver.team }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ driver.points }}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
+<div class="flex flex-col items-center justify-center px-4 py-8 dark:bg-cyan-950">
+  <div class="w-full max-w-6xl overflow-x-auto bg-white dark:bg-blue-950 shadow-lg rounded-xl">
+    <table class="min-w-full text-sm text-gray-700 dark:text-gray-200">
+      <thead class="bg-gray-100 dark:bg-cyan-900 text-xs uppercase">
+        <tr>
+          <th class="px-6 py-4 text-left">S.No</th>
+          <th class="px-6 py-4 text-left">Name</th>
+          <th class="px-6 py-4 text-left">Team</th>
+          <th class="px-6 py-4 text-left">Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for driver in driversboard %}
+          <tr class="border-t dark:border-cyan-700 hover:bg-gray-50 dark:hover:bg-cyan-800 transition">
+            <td class="px-6 py-4">{{ forloop.counter }}</td>
+            <td class="px-6 py-4 font-medium">{{ driver.name }}</td>
+            <td class="px-6 py-4">{{ driver.team }}</td>
+            <td class="px-6 py-4">{{ driver.points }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
     </table>
+  </div>
 </div>
 {% endblock %}
+
 
 {% block constructordisplay %}
 <div class="flex flex-wrap justify-center items-end gap-10 dark:bg-gray-900 p-6  ms-10 me-10 rounded-4xl">
@@ -144,39 +131,30 @@
 {% endblock %}
 
 {% block constructor %}
-<div class="relative overflow-x-auto ms-45 mb-10 mt-10 me-45 rounded-xl">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-red-950 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    S.No
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Team
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Points
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for team in constructorboard %}
-            <tr class="bg-white border-b dark:bg-red-900 dark:border-gray-700 border-gray-200">
-                <td class="px-6 py-4">
-                    {{ forloop.counter }}
-                </td>
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ team.name }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ team.points }}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
+<div class="flex flex-col items-center justify-center px-4 py-8 dark:bg-cyan-950">
+  <div class="w-full max-w-6xl overflow-x-auto bg-white dark:bg-red-950 shadow-lg rounded-xl">
+    <table class="min-w-full text-sm text-gray-700 dark:text-gray-200">
+      <thead class="bg-gray-100 dark:bg-red-900 text-xs uppercase">
+        <tr>
+          <th class="px-6 py-4 text-left">S.No</th>
+          <th class="px-6 py-4 text-left">Team</th>
+          <th class="px-6 py-4 text-left">Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for team in constructorboard %}
+          <tr class="border-t dark:border-red-800 hover:bg-gray-50 dark:hover:bg-red-800 transition">
+            <td class="px-6 py-4">{{ forloop.counter }}</td>
+            <td class="px-6 py-4 font-medium">{{ team.name }}</td>
+            <td class="px-6 py-4">{{ team.points }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
     </table>
+  </div>
 </div>
 {% endblock %}
+
 
 {% block raceresult %}
 <div class="flex flex-wrap justify-center items-end gap-5 dark:bg-gray-900 p-6  ms-10 me-10 rounded-4xl">

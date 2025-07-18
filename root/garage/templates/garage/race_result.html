@@ -11,52 +11,53 @@
 {% endblock %}
 
 {% block driver %}
-<div class="relative overflow-x-auto ms-45 mb-10 mt-10 me-45 rounded-xl">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-blue-950 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    S.No
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Team
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Points
-                </th>
-                <th scope='col' class="px-6 py-3">
-                    Time/Retired
-                </th>
+<div class="flex flex-col items-center justify-center gap-8 px-4 py-8 dark:bg-cyan-950">
+
+  <!-- Race Header Card -->
+  <div class="w-full max-w-6xl relative rounded-2xl overflow-hidden shadow-xl">
+    <img src="{{ race.image.url }}" alt="Race Image" class="w-full h-64 object-cover" />
+    <div class="absolute inset-0 bg-black/50 p-6 flex flex-col justify-between">
+      <div class="flex items-center justify-between">
+        <h2 class="text-4xl font-bold text-white">{{ race.circuit }}</h2>
+        <img src="{{ race.country_image.url }}" alt="Flag" class="w-12 h-12 rounded-full object-cover" />
+      </div>
+    </div>
+    <a href="{% url 'detail_race_result' race.circuit %}" class="absolute inset-0"></a>
+  </div>
+
+  <!-- Results Table -->
+  <div class="w-full max-w-6xl overflow-x-auto bg-white dark:bg-blue-950 shadow-lg rounded-xl">
+    <table class="min-w-full text-sm text-gray-700 dark:text-gray-200">
+      <thead class="bg-gray-100 dark:bg-cyan-900 text-xs uppercase">
+        <tr>
+          <th class="px-6 py-4 text-left">S.No</th>
+          <th class="px-6 py-4 text-left">Name</th>
+          <th class="px-6 py-4 text-left">Team</th>
+          <th class="px-6 py-4 text-left">Points</th>
+          <th class="px-6 py-4 text-left">Time/Retired</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if race_result %}
+          {% for result in race_result %}
+            <tr class="border-t dark:border-cyan-700 hover:bg-gray-50 dark:hover:bg-cyan-800 transition">
+              <td class="px-6 py-4">{{ forloop.counter }}</td>
+              <td class="px-6 py-4 font-medium">{{ result.driver.name }}</td>
+              <td class="px-6 py-4">{{ result.driver.team }}</td>
+              <td class="px-6 py-4">{{ result.points }}</td>
+              <td class="px-6 py-4">{{ result.status }}</td>
             </tr>
-        </thead>
-        <tbody>
-            {% if race_result %}
-            {% for result in race_result %}
-            <tr class="bg-white border-b dark:bg-cyan-800 dark:border-gray-700 border-gray-200">
-                <td class="px-6 py-4">
-                    {{ forloop.counter }}
-                </td>
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ result.driver.name }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ result.driver.team }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ result.points }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ result.status }}
-                </td>
-            </tr>
-            {% endfor %}
-            {% else %}
-            <tr class="bg-white border-b dark:bg-cyan-800 dark:border-gray-700 border-gray-200"><td colspan='4' scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">No results yet!</td></tr>
-            {% endif %}
-        </tbody>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="5" class="text-center px-6 py-6 text-gray-600 dark:text-gray-300">
+              No results yet!
+            </td>
+          </tr>
+        {% endif %}
+      </tbody>
     </table>
+  </div>
+
 </div>
 {% endblock %}
