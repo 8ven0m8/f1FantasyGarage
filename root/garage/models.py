@@ -28,7 +28,7 @@ class Driver(models.Model):
     team = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.name}"
       
 class Calendar(models.Model):
     circuit = models.CharField(max_length=100)
