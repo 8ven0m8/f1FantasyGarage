@@ -22,7 +22,14 @@ class ConstructorsLeaderboard(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+class Driver(models.Model):
+    name = models.CharField(max_length=100)
+    team = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+      
 class Calendar(models.Model):
     circuit = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
@@ -44,6 +51,8 @@ class Calendar(models.Model):
     ]
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
 
+    participants = models.ManyToManyField(Driver, through='RaceResult', related_name='races')
+
     class Meta:
         ordering = ['from_date']
 
@@ -52,6 +61,18 @@ class Calendar(models.Model):
 
     def is_upcoming(self):
         return self.from_date > timezone.now()
+    
+class RaceResult(models.Model):
+    race = models.ForeignKey(Calendar, on_delete=models.CASCADE)
+    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    points = models.FloatField(default=0)
+    status = models.CharField(max_length=50, default='Finished')
+
+    class Meta:
+        unique_together = ('race', 'driver')
+
+    def __str__(self):
+        return f"{self.race.name} - {self.driver}"
     
 class Chat_post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -120,6 +141,9 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.comment[:10]
+
+
+
 
     
 

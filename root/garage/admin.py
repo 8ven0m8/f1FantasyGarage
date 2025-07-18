@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TopLeaderboard, ConstructorsLeaderboard, Calendar, Chat_post, Comments
+from .models import TopLeaderboard, ConstructorsLeaderboard, Calendar, Chat_post, Comments, Driver, RaceResult
 import nested_admin
 
 # Register your models here.
@@ -35,9 +35,16 @@ class CommentInline(nested_admin.NestedTabularInline):
     inlines = [ReplyInline]  # allow replies inside comment
     extra = 1
 
+class Driver_Admin(admin.ModelAdmin):
+    list_display = ('name', 'team')
 
+class RaceResult_Admin(admin.ModelAdmin):
+    list_display = ('race',)
+    ordering = ['-points']
 
 admin.site.register(TopLeaderboard, TopLeaderboardAdmin)
 admin.site.register(ConstructorsLeaderboard, ConstructorsLeaderboardAdmin)
 admin.site.register(Calendar, CalendarAdmin)
 admin.site.register(Chat_post, Chat_postAdmin)
+admin.site.register(Driver, Driver_Admin)
+admin.site.register(RaceResult, RaceResult_Admin)
