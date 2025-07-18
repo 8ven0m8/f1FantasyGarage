@@ -45,10 +45,6 @@ def leaderboard(request):
                                                        'third_c': third_c,
                                                        })
 
-@login_required
-def fantasy(request):
-    return render(request, 'garage/fantasy.html')
-
 def chat(request):
     posts = Chat_post.objects.all().order_by('-created_at')
 
