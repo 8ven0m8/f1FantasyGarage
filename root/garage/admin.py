@@ -52,12 +52,12 @@ class DriverAdmin(admin.ModelAdmin):
     search_fields = ('name', 'team')
     
 class RaceResultAdmin(admin.ModelAdmin):
-    list_display = ('race', 'get_race_date', 'driver', 'points', 'status')
+    list_display = ('race', 'position', 'get_race_date', 'driver', 'points', 'status')
     list_filter = ('race__circuit', 'driver__team', 'status')
     search_fields = ('race__circuit', 'driver__name')
     
     # Correctly order by the date on the related Calendar model, then by points
-    ordering = ('race__from_date', '-points')
+    ordering = ('race__from_date', '-position')
 
     # Custom method to display the race date in the list view
     def get_race_date(self, obj):

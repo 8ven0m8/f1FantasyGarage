@@ -30,7 +30,7 @@
     <table class="min-w-full text-sm text-gray-700 dark:text-gray-200">
       <thead class="bg-gray-100 dark:bg-cyan-900 text-xs uppercase">
         <tr>
-          <th class="px-6 py-4 text-left">S.No</th>
+          <th class="px-6 py-4 text-left">Position</th>
           <th class="px-6 py-4 text-left">Name</th>
           <th class="px-6 py-4 text-left">Team</th>
           <th class="px-6 py-4 text-left">Points</th>
@@ -41,10 +41,10 @@
         {% if race_result %}
           {% for result in race_result %}
             <tr class="border-t dark:border-cyan-700 hover:bg-gray-50 dark:hover:bg-cyan-800 transition">
-              <td class="px-6 py-4">{{ forloop.counter }}</td>
+              <td class="px-6 py-4">{{ result.position }}</td>
               <td class="px-6 py-4 font-medium">{{ result.driver.name }}</td>
               <td class="px-6 py-4">{{ result.driver.team }}</td>
-              <td class="px-6 py-4">{{ result.points|floatformat:0 }}</td>
+              <td class="px-6 py-4">{{ result.points }}</td>
               <td class="px-6 py-4">{{ result.status }}</td>
             </tr>
           {% endfor %}

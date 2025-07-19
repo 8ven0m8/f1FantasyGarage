@@ -65,8 +65,9 @@ class Calendar(models.Model):
 class RaceResult(models.Model):
     race = models.ForeignKey(Calendar, on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
-    points = models.FloatField(default=0)
+    points = models.IntegerField(default=0)
     status = models.CharField(max_length=50, default='Finished')
+    position = models.IntegerField(default=0)
 
     class Meta:
         unique_together = ('race', 'driver')

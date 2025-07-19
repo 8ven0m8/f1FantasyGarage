@@ -293,7 +293,7 @@ def search_view(request):
     return render(request, 'garage/search_result.html', {'posts': posts})
 
 def DetailRaceResult(request, circuit_name):
-    race_result = RaceResult.objects.all().filter(race__circuit__iexact=circuit_name)
+    race_result = RaceResult.objects.all().filter(race__circuit__iexact=circuit_name).order_by('position')
     race = Calendar.objects.filter(circuit__iexact=circuit_name).get()
     return render(request, 'garage/race_result.html', {'race_result': race_result,
                                                        'race': race,
