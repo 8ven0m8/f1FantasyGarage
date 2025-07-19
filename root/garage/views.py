@@ -27,7 +27,7 @@ def garage_home(request):
 def leaderboard(request):
     driversboard = TopLeaderboard.objects.all().order_by('-points')
     constructorboard = ConstructorsLeaderboard.objects.all().order_by('-points')
-    races = Calendar.objects.all()
+    races = Calendar.objects.all().order_by('-from_date')
 
 
     first_place = driversboard[0] if len(driversboard) > 0 else None
