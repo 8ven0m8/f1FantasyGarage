@@ -3,19 +3,25 @@
 {% block title %}Garage{% endblock %}
 
 {% block TopLeaderboard %}
-<div class="w-full border-2 border-gray-700 bg-blue-950">
-    <h1 class="text-3xl font-mono text-center mt-4 mb-5 text-gray-800 dark:text-white">
+<div class="w-full border-2 border-gray-700 bg-blue-950 py-12">
+    <h1 class="text-3xl lg:text-4xl font-mono text-center mb-8 text-gray-800 dark:text-white px-4">
         Top 5 in {{year}} Drivers Championship
     </h1>
-    <div class="flex flex-row items-center justify-center text-center">
+    
+    <!-- 
+        MOBILE: A horizontal scroll container with snap-to-center functionality.
+        DESKTOP (lg): A centered 5-column grid.
+    -->
+    <div class="lg:grid lg:grid-cols-5 lg:gap-6 lg:justify-center lg:px-4 flex overflow-x-auto snap-x snap-mandatory py-4 gap-x-6 px-4">
         {% for data in leaderdata|slice:":5" %}
-        <div class="max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 m-4">
+        <!-- Card: Fixed width for consistency in both mobile scroll and desktop grid -->
+        <div class="flex-shrink-0 snap-center w-72 bg-white rounded-lg shadow-lg dark:bg-gray-800 overflow-hidden">
             <div class="px-4 py-2">
                 <h1 class="text-xl font-bold text-gray-800 uppercase dark:text-white">{{data.name}}</h1>
                 <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{data.team}}</p>
             </div>
             
-            <img class="object-cover w-58 h-65 mt-2" src="{{data.image.url}}" alt="NIKE AIR">
+            <img class="w-full h-56 mt-2 object-top object-cover" src="{{data.image.url}}" alt="{{data.name}}">
             
             <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
                 <h1 class="text-lg font-bold text-white">{{data.points}} PTS</h1>
@@ -27,76 +33,56 @@
 </div>
 {% endblock %}
 
+
 {% block calendar %}
-<div class="w-full border-2 border-gray-700 pb-18">
-    <h1 class="text-4xl font-extrabold text-left mt-4 mb-5 ms-5 text-gray-800 dark:text-white">
-        {{year}} Calendar:
+<div class="w-full border-2 border-gray-700 py-12">
+    <h1 class="text-4xl lg:text-5xl font-extrabold text-left mb-8 ms-5 text-gray-800 dark:text-white">
+        {{year}} Calendar
     </h1>
-    <div class="flex flex-row items-center justify-center text-center">
-        <!--previous race-->
-        <div class="relative w-136 h-84 rounded-lg overflow-hidden shadow-lg m-4">
-            <!-- Image -->
-            <img src="{{past.image.url}}" alt="Background" class="w-full h-full object-cover" />
-            
-            <!-- Overlay with text -->
-            <div class="absolute inset-0 bg-black/50 flex flex-col justify-start items-start p-6 z-20">
-                
-                <!-- Title + Flag Row -->
+
+    <!--
+        MOBILE: A horizontal scroll container for the race cards.
+        DESKTOP (lg): A 4-column grid where the "Next Race" is the centerpiece.
+    -->
+    <div class="grid grid-flow-col auto-cols-[90%] lg:auto-cols-auto lg:grid-flow-row lg:grid-cols-4 gap-6 px-4 overflow-x-auto lg:overflow-visible snap-x snap-mandatory">
+        
+        <!-- Previous Race Card -->
+        <div class="snap-center lg:col-span-1 h-96 relative rounded-lg overflow-hidden shadow-lg group">
+            <img src="{{past.image.url}}" alt="Background" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                 <div class="flex items-center justify-between w-full">
                     <h2 class="text-3xl font-bold text-white">{{past.circuit}}</h2>
-                    <img src="{{past.country_image.url}}" alt="Flag" class="w-10 h-10 rounded-full object-cover ml-4" />
+                    <img src="{{past.country_image.url}}" alt="Flag" class="w-10 h-10 rounded-full object-cover" />
                 </div>
-                
-                <!-- Description -->
-                <p class="text-white mt-2 text-left font-bold text-xl">{{past.country}}</p>
-                <p class="text-white mt-2 text-left">{{past.description}}</p>
-                
-                <!-- Date -->
-                <p class="text-white mt-2 text-xl font-bold">{{ past.from_date|date:"M d" }} - {{ past.to_date|date:"M d" }}</p>
+                <p class="text-white/90 mt-1 font-semibold text-xl">{{past.country}}</p>
+                <p class="text-white mt-2 font-bold text-xl">{{ past.from_date|date:"M d" }} - {{ past.to_date|date:"M d" }}</p>
             </div>
         </div>
-        <!--next race-->
-        <div class="relative w-156 h-104 rounded-lg overflow-hidden shadow-lg m-4">
-            <!-- Image -->
-            <img src="{{next_race.image.url}}" alt="Background" class="w-full h-full object-cover" />
-            
-            <!-- Overlay with text -->
-            <div class="absolute inset-0 bg-black/50 flex flex-col justify-start items-start p-6 z-20">
-                
-                <!-- Title + Flag Row -->
+
+        <!-- Next Race Card (The Hero Element) -->
+        <div class="snap-center lg:col-span-2 lg:row-span-1 h-96 relative rounded-lg overflow-hidden shadow-2xl group border-2 border-yellow-400">
+            <img src="{{next_race.image.url}}" alt="Background" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                 <div class="flex items-center justify-between w-full">
-                    <h2 class="text-3xl font-bold text-white">{{next_race.circuit}}</h2>
-                    <img src="{{next_race.country_image.url}}" alt="Flag" class="w-10 h-10 rounded-full object-cover ml-4" />
+                    <h2 class="text-4xl font-bold text-white">{{next_race.circuit}}</h2>
+                    <img src="{{next_race.country_image.url}}" alt="Flag" class="w-12 h-12 rounded-full object-cover" />
                 </div>
-                
-                <!-- Description -->
-                <p class="text-white mt-2 text-left font-bold text-xl">{{next_race.country}}</p>
-                <p class="text-white mt-2 text-left">{{next_race.description}}</p>
-                
-                <!-- Date -->
-                <p class="text-white mt-2 text-xl font-bold">{{ next_race.from_date|date:"M d" }} - {{ next_race.to_date|date:"M d" }}</p>
+                <p class="text-yellow-300 mt-1 font-bold text-xl uppercase">Next Race</p>
+                <p class="text-white/90 mt-1 font-semibold text-xl">{{next_race.country}}</p>
+                <p class="text-white mt-2 text-2xl font-bold">{{ next_race.from_date|date:"M d" }} - {{ next_race.to_date|date:"M d" }}</p>
             </div>
         </div>
-        <!--upcoming race-->
-        <div class="relative w-136 h-84 rounded-lg overflow-hidden shadow-lg m-4">
-            <!-- Image -->
-            <img src="{{upcoming.image.url}}" alt="Background" class="w-full h-full object-cover" />
-            
-            <!-- Overlay with text -->
-            <div class="absolute inset-0 bg-black/50 flex flex-col justify-start items-start p-6 z-20">
-                
-                <!-- Title + Flag Row -->
+
+        <!-- Upcoming Race Card -->
+        <div class="snap-center lg:col-span-1 h-96 relative rounded-lg overflow-hidden shadow-lg group">
+            <img src="{{upcoming.image.url}}" alt="Background" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                 <div class="flex items-center justify-between w-full">
                     <h2 class="text-3xl font-bold text-white">{{upcoming.circuit}}</h2>
-                    <img src="{{upcoming.country_image.url}}" alt="Flag" class="w-10 h-10 rounded-full object-cover ml-4" />
+                    <img src="{{upcoming.country_image.url}}" alt="Flag" class="w-10 h-10 rounded-full object-cover" />
                 </div>
-                
-                <!-- Description -->
-                <p class="text-white mt-2 text-left font-bold text-xl">{{upcoming.country}}</p>
-                <p class="text-white mt-2 text-left">{{upcoming.description}}</p>
-                
-                <!-- Date -->
-                <p class="text-white mt-2 text-xl font-bold">{{ upcoming.from_date|date:"M d" }} - {{ upcoming.to_date|date:"M d" }}</p>
+                <p class="text-white/90 mt-1 font-semibold text-xl">{{upcoming.country}}</p>
+                <p class="text-white mt-2 font-bold text-xl">{{ upcoming.from_date|date:"M d" }} - {{ upcoming.to_date|date:"M d" }}</p>
             </div>
         </div>
     </div>
@@ -105,18 +91,24 @@
 
 
 {% block Constructorboard %}
-<div class="w-full border-2 border-gray-700 bg-red-950">
-    <h1 class="text-3xl font-mono text-center mt-4 mb-5 text-gray-800 dark:text-white">
+<div class="w-full border-2 border-gray-700 bg-red-950 py-12">
+    <h1 class="text-3xl lg:text-4xl font-mono text-center mb-8 text-gray-800 dark:text-white px-4">
         Top 5 in {{year}} Constructors Championship
     </h1>
-    <div class="flex flex-row items-center justify-center text-center">
+
+    <!-- 
+        MOBILE: A horizontal scroll container.
+        DESKTOP (lg): A centered 5-column grid.
+    -->
+    <div class="lg:grid lg:grid-cols-5 lg:gap-6 lg:justify-center lg:px-4 flex overflow-x-auto snap-x snap-mandatory py-4 gap-x-6 px-4">
         {% for data in constructordata|slice:":5" %}
-        <div class="max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 m-4">
+        <!-- Card: Fixed width for consistency -->
+        <div class="flex-shrink-0 snap-center w-72 bg-white rounded-lg shadow-lg dark:bg-gray-800 overflow-hidden">
             <div class="px-4 py-2">
                 <h1 class="text-xl font-bold text-gray-800 uppercase dark:text-white">{{data.name}}</h1>
             </div>
             
-            <img class="object-cover w-58 h-65 mt-2" src="{{data.image.url}}" alt="NIKE AIR">
+            <img class="object-cover w-full h-56" src="{{data.image.url}}" alt="{{data.name}}">
             
             <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
                 <h1 class="text-lg font-bold text-white">{{data.points}} PTS</h1>
