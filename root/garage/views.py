@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.db.models import Q
 from django.views.generic import ListView, DetailView
+from django.db.models import Prefetch
 
 # Create your views here.
 def garage_home(request):
@@ -29,6 +30,16 @@ def leaderboard(request):
     constructorboard = ConstructorsLeaderboard.objects.all().order_by('-points')
     races = Calendar.objects.all().order_by('-from_date')
 
+    races_with_results = Calendar.objects.filter(
+        from_date__lt=timezone.now()
+    ).prefetch_related(
+        'raceresult_set__driver' 
+    ).order_by('-from_date')
+
+    context = {
+        'races': races_with_results,
+    }
+
 
     first_place = driversboard[0] if len(driversboard) > 0 else None
     second_place = driversboard[1] if len(driversboard) > 1 else None
@@ -47,6 +58,7 @@ def leaderboard(request):
                                                        'second_c': second_c,
                                                        'third_c': third_c,
                                                        'races': races,
+                                                       'context': context,
                                                        })
 
 def chat(request):

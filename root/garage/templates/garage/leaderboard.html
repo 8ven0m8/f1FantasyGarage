@@ -180,7 +180,46 @@
                 <!-- Date -->
                 <p class="text-white mt-2 text-xl font-bold">{{ race.from_date|date:"M d" }} - {{ race.to_date|date:"M d" }}</p>
             {% if race.status != 'none' %}
-            <div type="button" class=" absolute bottom-5 right-5 focus:outline-none text-white bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">{{ race.status }}</div>
+            <div type="button" class=" absolute top-5 right-20 focus:outline-none text-white bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">{{ race.status }}</div>
+            {% endif %}
+            {% if race.participants.all %}
+            <!-- Cute Small Table with semi-transparent backgrounds -->
+            <div class="w-full max-w-xs absolute bottom-2 right-2">
+              <!-- The container has the shadow and rounded corners. 
+                  bg-white was removed to allow transparency to show through. -->
+              <div class="shadow-lg rounded-lg overflow-hidden">
+                <table class="w-full text-sm text-left">
+                  
+                  <!-- Table Head: bg-cyan-950 with 50% opacity -->
+                  <thead class="bg-cyan-950/50 text-cyan-100">
+                    <tr>
+                      <th scope="col" class="px-4 py-3 font-medium">
+                        Pos
+                      </th>
+                      <th scope="col" class="px-4 py-3 font-medium">
+                        Name
+                      </th>
+                      <th scope="col" class="px-4 py-3 font-medium">
+                        Team
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <!-- Table Body: bg-cyan-800 with 40% opacity -->
+                  <tbody class="divide-y divide-cyan-900/50 bg-cyan-800/40">
+                    {% for result in race.get_podium %}
+                    <tr>
+                      <td class="px-4 py-3 font-bold text-white">{{forloop.counter}}</td>
+                      <td class="px-4 py-3 text-gray-200">{{result.driver.name}}</td>
+                      <td class="px-4 py-3 text-gray-200">{{result.driver.team}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+
             {% endif %}
         </div>
     </div>

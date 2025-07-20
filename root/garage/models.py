@@ -62,6 +62,9 @@ class Calendar(models.Model):
     def is_upcoming(self):
         return self.from_date > timezone.now()
     
+    def get_podium(self):
+        return self.raceresult_set.order_by('position').select_related('driver')[:3]
+    
 class RaceResult(models.Model):
     race = models.ForeignKey(Calendar, on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
