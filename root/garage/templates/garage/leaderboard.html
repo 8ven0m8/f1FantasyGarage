@@ -3,87 +3,87 @@
 {% block title %}Leaderboard{% endblock %}
 
 {% block leaderboardnav %}
-<nav class="w-full bg-transparent px-8 py-4 flex justify-center gap-12">
-  <button onclick="showSection('driver')" class="relative text-white text-lg font-semibold transition duration-300 ease-in-out hover:text-gray-200
-                     after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-0.5 after:w-0 
-                     after:bg-white after:transition-all after:duration-500 after:ease-in-out 
-                     hover:after:w-full focus:after:w-full">
+<nav class="w-full bg-transparent px-4 py-4 flex flex-row items-center justify-center gap-4 md:gap-12">
+  <button onclick="showSection('driver')" class="relative text-white text-sm md:text-lg font-semibold transition duration-300 ease-in-out hover:text-gray-200
+                   after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-0.5 after:w-0 
+                   after:bg-white after:transition-all after:duration-500 after:ease-in-out 
+                   hover:after:w-full focus:after:w-full">
     Driver Standing
-    </button>
-  <button onclick="showSection('constructor')" class="relative text-white text-lg font-semibold transition duration-300 ease-in-out hover:text-gray-200
-                     after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-0.5 after:w-0 
-                     after:bg-white after:transition-all after:duration-500 after:ease-in-out 
-                     hover:after:w-full focus:after:w-full">
+  </button>
+  <button onclick="showSection('constructor')" class="relative text-white text-sm md:text-lg font-semibold transition duration-300 ease-in-out hover:text-gray-200
+                   after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-0.5 after:w-0 
+                   after:bg-white after:transition-all after:duration-500 after:ease-in-out 
+                   hover:after:w-full focus:after:w-full">
     Team Standing
-    </button>
-  <button onclick="showSection('raceresult')" class="relative text-white text-lg font-semibold transition duration-300 ease-in-out hover:text-gray-200
-                     after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-0.5 after:w-0 
-                     after:bg-white after:transition-all after:duration-500 after:ease-in-out 
-                     hover:after:w-full focus:after:w-full">
+  </button>
+  <button onclick="showSection('raceresult')" class="relative text-white text-sm md:text-lg font-semibold transition duration-300 ease-in-out hover:text-gray-200
+                   after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-0.5 after:w-0 
+                   after:bg-white after:transition-all after:duration-500 after:ease-in-out 
+                   hover:after:w-full focus:after:w-full">
     Race Result
-    </button>
+  </button>
 </nav>
 {% endblock %}
 
 {% block driverdisplay %}
-<div class="flex flex-wrap justify-center items-end gap-10 dark:bg-gray-900 p-6 ms-10 me-10 rounded-4xl">
+<div class="flex flex-col md:flex-row md:flex-wrap justify-center items-center md:items-end gap-6 md:gap-10 dark:bg-gray-900 p-4 md:p-6 mx-2 md:ms-10 md:me-10 rounded-4xl">
   <!-- 2nd Place -->
-    <div class="relative w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden scale-105">
-        <img src="{{ second_place.image.url }}" alt="Background"
-            class="absolute inset-0 w-full h-full object-cover object-top opacity-30 z-0" />
-        <div class="relative z-10">
-            <div class="text-xl font-bold">2<sup class="text-sm font-normal">ND</sup></div>
-            <div class="text-2xl font-semibold mt-1">{{ second_place.name }}</div>
-            <div class="text-sm text-white/80">{{ second_place.team }}</div>
-            <div class="mt-24 text-xl font-bold">{{ second_place.points }} <span class="text-sm font-normal">PTS</span></div>
-        </div>
+  <div class="relative w-full md:w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden order-2 md:order-1 md:scale-105">
+    <img src="{{ second_place.image.url }}" alt="Background"
+         class="absolute inset-0 w-full h-full object-cover object-top opacity-30 z-0" />
+    <div class="relative z-10">
+      <div class="text-lg md:text-xl font-bold">2<sup class="text-xs md:text-sm font-normal">ND</sup></div>
+      <div class="text-xl md:text-2xl font-semibold mt-1">{{ second_place.name }}</div>
+      <div class="text-sm text-white/80">{{ second_place.team }}</div>
+      <div class="mt-16 md:mt-24 text-lg md:text-xl font-bold">{{ second_place.points }} <span class="text-sm font-normal">PTS</span></div>
     </div>
+  </div>
 
   <!-- 1st Place -->
-   <div class="relative w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden scale-110">
-        <img src="{{ first_place.image.url }}" alt="Background"
-            class="absolute inset-0 w-full h-full object-cover object-top  opacity-30 z-0" />
-        <div class="relative z-10">
-            <div class="text-xl font-bold">1<sup class="text-sm font-normal">ST</sup></div>
-            <div class="text-2xl font-semibold mt-1">{{ first_place.name }}</div>
-            <div class="text-sm text-white/80">{{ first_place.team }}</div>
-            <div class="mt-24 text-xl font-bold">{{ first_place.points }} <span class="text-sm font-normal">PTS</span></div>
-        </div>
+  <div class="relative w-full md:w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden order-1 md:order-2 md:scale-110">
+    <img src="{{ first_place.image.url }}" alt="Background"
+         class="absolute inset-0 w-full h-full object-cover object-top opacity-30 z-0" />
+    <div class="relative z-10">
+      <div class="text-lg md:text-xl font-bold">1<sup class="text-xs md:text-sm font-normal">ST</sup></div>
+      <div class="text-xl md:text-2xl font-semibold mt-1">{{ first_place.name }}</div>
+      <div class="text-sm text-white/80">{{ first_place.team }}</div>
+      <div class="mt-16 md:mt-24 text-lg md:text-xl font-bold">{{ first_place.points }} <span class="text-sm font-normal">PTS</span></div>
     </div>
+  </div>
 
   <!-- 3rd Place -->
-  <div class="relative w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden">
-        <img src="{{ third_place.image.url }}" alt="Background"
-            class="absolute inset-0 w-full h-full object-cover object-top  opacity-30 z-0" />
-        <div class="relative z-10">
-            <div class="text-xl font-bold">3<sup class="text-sm font-normal">RD</sup></div>
-            <div class="text-2xl font-semibold mt-1">{{ third_place.name }}</div>
-            <div class="text-sm text-white/80">{{ third_place.team }}</div>
-            <div class="mt-24 text-xl font-bold">{{ third_place.points }} <span class="text-sm font-normal">PTS</span></div>
-        </div>
+  <div class="relative w-full md:w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden order-3">
+    <img src="{{ third_place.image.url }}" alt="Background"
+         class="absolute inset-0 w-full h-full object-cover object-top opacity-30 z-0" />
+    <div class="relative z-10">
+      <div class="text-lg md:text-xl font-bold">3<sup class="text-xs md:text-sm font-normal">RD</sup></div>
+      <div class="text-xl md:text-2xl font-semibold mt-1">{{ third_place.name }}</div>
+      <div class="text-sm text-white/80">{{ third_place.team }}</div>
+      <div class="mt-16 md:mt-24 text-lg md:text-xl font-bold">{{ third_place.points }} <span class="text-sm font-normal">PTS</span></div>
     </div>
+  </div>
 </div>
 {% endblock %}
 
 {% block driver %}
-<div class="flex flex-col items-center justify-center px-4 py-8 dark:bg-cyan-950">
+<div class="flex flex-col items-center justify-center px-2 py-8 dark:bg-cyan-950">
   <div class="w-full max-w-6xl overflow-x-auto bg-white dark:bg-blue-950 shadow-lg rounded-xl">
     <table class="min-w-full text-sm text-gray-700 dark:text-gray-200">
       <thead class="bg-gray-100 dark:bg-cyan-900 text-xs uppercase">
         <tr>
-          <th class="px-6 py-4 text-left">S.No</th>
-          <th class="px-6 py-4 text-left">Name</th>
-          <th class="px-6 py-4 text-left">Team</th>
-          <th class="px-6 py-4 text-left">Points</th>
+          <th class="px-4 py-3 md:px-6 md:py-4 text-left">S.No</th>
+          <th class="px-4 py-3 md:px-6 md:py-4 text-left">Name</th>
+          <th class="px-4 py-3 md:px-6 md:py-4 text-left">Team</th>
+          <th class="px-4 py-3 md:px-6 md:py-4 text-left">Points</th>
         </tr>
       </thead>
       <tbody>
         {% for driver in driversboard %}
           <tr class="border-t dark:border-cyan-700 hover:bg-gray-50 dark:hover:bg-cyan-800 transition">
-            <td class="px-6 py-4">{{ forloop.counter }}</td>
-            <td class="px-6 py-4 font-medium">{{ driver.name }}</td>
-            <td class="px-6 py-4">{{ driver.team }}</td>
-            <td class="px-6 py-4">{{ driver.points }}</td>
+            <td class="px-4 py-3 md:px-6 md:py-4">{{ forloop.counter }}</td>
+            <td class="px-4 py-3 md:px-6 md:py-4 font-medium">{{ driver.name }}</td>
+            <td class="px-4 py-3 md:px-6 md:py-4">{{ driver.team }}</td>
+            <td class="px-4 py-3 md:px-6 md:py-4">{{ driver.points }}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -92,61 +92,60 @@
 </div>
 {% endblock %}
 
-
 {% block constructordisplay %}
-<div class="flex flex-wrap justify-center items-end gap-10 dark:bg-gray-900 p-6  ms-10 me-10 rounded-4xl">
+<div class="flex flex-col md:flex-row md:flex-wrap justify-center items-center md:items-end gap-6 md:gap-10 dark:bg-gray-900 p-4 md:p-6 mx-2 md:ms-10 md:me-10 rounded-4xl">
   <!-- 2nd Place -->
-    <div class="relative w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden scale-105">
-        <img src="{{ second_c.image.url }}" alt="Background"
-            class="absolute inset-0 w-full h-full object-cover opacity-30 z-0" />
-        <div class="relative z-10">
-            <div class="text-xl font-bold">2<sup class="text-sm font-normal">ND</sup></div>
-            <div class="text-2xl font-semibold mt-1">{{ second_c.name }}</div>
-            <div class="mt-24 text-xl font-bold">{{ second_c.points }} <span class="text-sm font-normal">PTS</span></div>
-        </div>
+  <div class="relative w-full md:w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden order-2 md:order-1 md:scale-105">
+    <img src="{{ second_c.image.url }}" alt="Background"
+         class="absolute inset-0 w-full h-full object-cover opacity-30 z-0" />
+    <div class="relative z-10">
+      <div class="text-lg md:text-xl font-bold">2<sup class="text-xs md:text-sm font-normal">ND</sup></div>
+      <div class="text-xl md:text-2xl font-semibold mt-1">{{ second_c.name }}</div>
+      <div class="mt-16 md:mt-24 text-lg md:text-xl font-bold">{{ second_c.points }} <span class="text-sm font-normal">PTS</span></div>
     </div>
+  </div>
 
   <!-- 1st Place -->
-   <div class="relative w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden scale-110">
-        <img src="{{ first_c.image.url }}" alt="Background"
-            class="absolute inset-0 w-full h-full object-cover opacity-30 z-0" />
-        <div class="relative z-10">
-            <div class="text-xl font-bold">1<sup class="text-sm font-normal">ST</sup></div>
-            <div class="text-2xl font-semibold mt-1">{{ first_c.name }}</div>
-            <div class="mt-24 text-xl font-bold">{{ first_c.points }} <span class="text-sm font-normal">PTS</span></div>
-        </div>
+  <div class="relative w-full md:w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden order-1 md:order-2 md:scale-110">
+    <img src="{{ first_c.image.url }}" alt="Background"
+         class="absolute inset-0 w-full h-full object-cover opacity-30 z-0" />
+    <div class="relative z-10">
+      <div class="text-lg md:text-xl font-bold">1<sup class="text-xs md:text-sm font-normal">ST</sup></div>
+      <div class="text-xl md:text-2xl font-semibold mt-1">{{ first_c.name }}</div>
+      <div class="mt-16 md:mt-24 text-lg md:text-xl font-bold">{{ first_c.points }} <span class="text-sm font-normal">PTS</span></div>
     </div>
+  </div>
 
   <!-- 3rd Place -->
-  <div class="relative w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden">
-        <img src="{{ third_c.image.url }}" alt="Background"
-            class="absolute inset-0 w-full h-full object-cover opacity-30 z-0" />
-        <div class="relative z-10">
-            <div class="text-xl font-bold">3<sup class="text-sm font-normal">RD</sup></div>
-            <div class="text-2xl font-semibold mt-1">{{ third_c.name }}</div>
-            <div class="mt-24 text-xl font-bold">{{ third_c.points }} <span class="text-sm font-normal">PTS</span></div>
-        </div>
+  <div class="relative w-full md:w-80 rounded-xl p-6 text-white bg-gradient-to-br shadow-lg overflow-hidden order-3">
+    <img src="{{ third_c.image.url }}" alt="Background"
+         class="absolute inset-0 w-full h-full object-cover opacity-30 z-0" />
+    <div class="relative z-10">
+      <div class="text-lg md:text-xl font-bold">3<sup class="text-xs md:text-sm font-normal">RD</sup></div>
+      <div class="text-xl md:text-2xl font-semibold mt-1">{{ third_c.name }}</div>
+      <div class="mt-16 md:mt-24 text-lg md:text-xl font-bold">{{ third_c.points }} <span class="text-sm font-normal">PTS</span></div>
     </div>
+  </div>
 </div>
 {% endblock %}
 
 {% block constructor %}
-<div class="flex flex-col items-center justify-center px-4 py-8 dark:bg-cyan-950">
+<div class="flex flex-col items-center justify-center px-2 py-8 dark:bg-cyan-950">
   <div class="w-full max-w-6xl overflow-x-auto bg-white dark:bg-red-950 shadow-lg rounded-xl">
     <table class="min-w-full text-sm text-gray-700 dark:text-gray-200">
       <thead class="bg-gray-100 dark:bg-red-900 text-xs uppercase">
         <tr>
-          <th class="px-6 py-4 text-left">S.No</th>
-          <th class="px-6 py-4 text-left">Team</th>
-          <th class="px-6 py-4 text-left">Points</th>
+          <th class="px-4 py-3 md:px-6 md:py-4 text-left">S.No</th>
+          <th class="px-4 py-3 md:px-6 md:py-4 text-left">Team</th>
+          <th class="px-4 py-3 md:px-6 md:py-4 text-left">Points</th>
         </tr>
       </thead>
       <tbody>
         {% for team in constructorboard %}
           <tr class="border-t dark:border-red-800 hover:bg-gray-50 dark:hover:bg-red-800 transition">
-            <td class="px-6 py-4">{{ forloop.counter }}</td>
-            <td class="px-6 py-4 font-medium">{{ team.name }}</td>
-            <td class="px-6 py-4">{{ team.points }}</td>
+            <td class="px-4 py-3 md:px-6 md:py-4">{{ forloop.counter }}</td>
+            <td class="px-4 py-3 md:px-6 md:py-4 font-medium">{{ team.name }}</td>
+            <td class="px-4 py-3 md:px-6 md:py-4">{{ team.points }}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -155,75 +154,70 @@
 </div>
 {% endblock %}
 
-
 {% block raceresult %}
-<div class="flex flex-wrap justify-center items-end gap-5 dark:bg-gray-900 p-6  ms-10 me-10 rounded-4xl">
+<div class="flex flex-wrap justify-center items-end gap-5 dark:bg-gray-900 p-4 md:p-6 mx-2 md:ms-10 md:me-10 rounded-4xl">
 {% for race in races %}
-<a href="{% url 'detail_race_result' race.circuit %}" class="flex flex-wrap justify-center items-end gap-4 dark:bg-gray-900 p-6 text-7xl text-white">
-    <div class=" relative w-250 h-104 rounded-lg overflow-hidden shadow-lg transition-transform duration-100 ease-in-out hover:scale-101 hover:z-10">
-        <!-- Image -->
-        <img src="{{race.image.url}}" alt="Background" class="w-full h-full object-cover" />
-        
-        <!-- Overlay with text -->
-        <div class="absolute inset-0 bg-black/50 flex flex-col justify-start items-start p-6 z-20">
+<a href="{% url 'detail_race_result' race.circuit %}" class="w-full md:w-auto">
+  <div class="relative w-full h-48 md:w-250 md:h-104 rounded-lg overflow-hidden shadow-lg transition-transform duration-100 ease-in-out hover:scale-101 hover:z-10">
+    <!-- Image -->
+    <img src="{{race.image.url}}" alt="Background" class="w-full h-full object-cover" />
+    
+    <!-- Overlay with text -->
+    <div class="absolute inset-0 bg-black/50 flex flex-col justify-start items-start p-4 md:p-6 z-20">
+      
+      <!-- Title + Flag Row -->
+      <div class="flex items-center justify-between w-full">
+        <h2 class="text-xl md:text-3xl font-bold text-white">#{{forloop.revcounter}} {{race.circuit}}</h2>
+        <img src="{{race.country_image.url}}" alt="Flag" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover ml-4" />
+      </div>
+      
+      <!-- Description (Hidden on mobile) -->
+      <p class="hidden md:block text-white mt-2 text-left font-bold text-lg md:text-xl">{{race.country}}</p>
+      <p class="hidden md:block text-white mt-2 text-left text-base md:text-xl max-w-full md:max-w-120">{{race.description}}</p>
+      
+      <!-- Date -->
+      <p class="text-white mt-2 text-sm md:text-xl font-bold">{{ race.from_date|date:"M d" }} - {{ race.to_date|date:"M d" }}</p>
+      
+      <!-- Status Button (Repositioned for mobile) -->
+      {% if race.status != 'none' %}
+      <div class="absolute bottom-4 right-4 md:bottom-auto md:top-5 md:right-20 inline-flex items-center justify-center text-white bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs md:text-lg px-3 py-1.5 md:px-5 md:py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+        {{ race.status }}
+      </div>
+      {% endif %}
+      
+      <!-- Mini Leaderboard (Hidden on mobile) -->
+      {% if race.participants.all %}
+      <div class="hidden md:block w-full max-w-xs absolute bottom-2 right-2 mt-4 md:mt-0">
+        <div class="shadow-lg rounded-lg overflow-hidden">
+          <table class="w-full text-xs md:text-sm text-left">
             
-            <!-- Title + Flag Row -->
-            <div class="flex items-center justify-between w-full">
-                <h2 class="text-3xl font-bold text-white">#{{forloop.revcounter}} {{race.circuit}}</h2>
-                <img src="{{race.country_image.url}}" alt="Flag" class="w-10 h-10 rounded-full object-cover ml-4" />
-            </div>
-            
-            <!-- Description -->
-            <p class="text-white mt-2 text-left font-bold text-xl">{{race.country}}</p>
-                <p class="text-white mt-2 text-left text-xl max-w-120">{{race.description}}</p>
-                
-                <!-- Date -->
-                <p class="text-white mt-2 text-xl font-bold">{{ race.from_date|date:"M d" }} - {{ race.to_date|date:"M d" }}</p>
-            {% if race.status != 'none' %}
-            <div type="button" class=" absolute top-5 right-20 focus:outline-none text-white bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">{{ race.status }}</div>
-            {% endif %}
-            {% if race.participants.all %}
-            <!-- Cute Small Table with semi-transparent backgrounds -->
-            <div class="w-full max-w-xs absolute bottom-2 right-2">
-              <!-- The container has the shadow and rounded corners. 
-                  bg-white was removed to allow transparency to show through. -->
-              <div class="shadow-lg rounded-lg overflow-hidden">
-                <table class="w-full text-sm text-left">
-                  
-                  <!-- Table Head: bg-cyan-950 with 50% opacity -->
-                  <thead class="bg-cyan-950/50 text-cyan-100">
-                    <tr>
-                      <th scope="col" class="px-4 py-3 font-medium">
-                        Pos
-                      </th>
-                      <th scope="col" class="px-4 py-3 font-medium">
-                        Name
-                      </th>
-                      <th scope="col" class="px-4 py-3 font-medium">
-                        Team
-                      </th>
-                    </tr>
-                  </thead>
+            <!-- Table Head -->
+            <thead class="bg-cyan-950/50 text-cyan-100">
+              <tr>
+                <th scope="col" class="px-2 py-1 md:px-4 md:py-3 font-medium">Pos</th>
+                <th scope="col" class="px-2 py-1 md:px-4 md:py-3 font-medium">Name</th>
+                <th scope="col" class="px-2 py-1 md:px-4 md:py-3 font-medium">Team</th>
+              </tr>
+            </thead>
 
-                  <!-- Table Body: bg-cyan-800 with 40% opacity -->
-                  <tbody class="divide-y divide-cyan-900/50 bg-cyan-800/40">
-                    {% for result in race.get_podium %}
-                    <tr>
-                      <td class="px-4 py-3 font-bold text-white">{{forloop.counter}}</td>
-                      <td class="px-4 py-3 text-gray-200">{{result.driver.name}}</td>
-                      <td class="px-4 py-3 text-gray-200">{{result.driver.team}}</td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-
-                </table>
-              </div>
-            </div>
-
-            {% endif %}
+            <!-- Table Body -->
+            <tbody class="divide-y divide-cyan-900/50 bg-cyan-800/40">
+              {% for result in race.get_podium %}
+              <tr>
+                <td class="px-2 py-1 md:px-4 md:py-3 font-bold text-white">{{forloop.counter}}</td>
+                <td class="px-2 py-1 md:px-4 md:py-3 text-gray-200">{{result.driver.name}}</td>
+                <td class="px-2 py-1 md:px-4 md:py-3 text-gray-200">{{result.driver.team}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
+      </div>
+      {% endif %}
     </div>
+  </div>
 </a>
 {% endfor %}
 </div>
 {% endblock %}
+
