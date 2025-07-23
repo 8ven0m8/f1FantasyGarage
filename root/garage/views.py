@@ -291,7 +291,7 @@ def update_profile_image(request):
         form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # or wherever your profile page is
+            return redirect('profile')
     else:
         form = ProfileForm(instance=request.user.profile)
 

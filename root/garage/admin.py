@@ -21,23 +21,19 @@ class Chat_postAdmin(admin.ModelAdmin):
 
 class ReplyInline(nested_admin.NestedTabularInline):
     model = Comments
-    fk_name = 'parent'  # this shows replies to a comment
+    fk_name = 'parent'  
     extra = 1
 
 class CommentInline(nested_admin.NestedTabularInline):
     model = Comments
     fk_name = 'post'
-    inlines = [ReplyInline]  # allow replies inside comment
+    inlines = [ReplyInline] 
     extra = 1
 
-# An inline admin to manage results directly from the Calendar page
 class RaceResultInline(admin.TabularInline):
     model = RaceResult
-    # Fields to display in the inline form
     fields = ('driver', 'points', 'status')
-    # Provides extra empty slots to add new results easily
     extra = 3
-    # Optional: adds a raw_id_fields widget for the driver, useful if you have many drivers
     raw_id_fields = ('driver',)
 
 
@@ -53,18 +49,16 @@ class DriverAdmin(admin.ModelAdmin):
     
 class RaceResultAdmin(admin.ModelAdmin):
     list_display = ('race', 'position', 'get_race_date', 'driver', 'points', 'status')
-    list_filter = ('race__circuit', 'driver__team', 'status')
+    list_filter = ('race__circuit', 'driver__team')
     search_fields = ('race__circuit', 'driver__name')
     
-    # Correctly order by the date on the related Calendar model, then by points
     ordering = ('race__from_date', '-position')
 
-    # Custom method to display the race date in the list view
     def get_race_date(self, obj):
         return obj.race.from_date
     
     get_race_date.short_description = 'Race Date'
-    get_race_date.admin_order_field = 'race__from_date' # Makes the column sortable
+    get_race_date.admin_order_field = 'race__from_date' 
 
 admin.site.register(TopLeaderboard, TopLeaderboardAdmin)
 admin.site.register(ConstructorsLeaderboard, ConstructorsLeaderboardAdmin)
